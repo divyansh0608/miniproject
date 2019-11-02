@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/divyansh0608/miniproject/issues"
   },
-  "homepage": "https://github.com/divyansh0608/miniproject#readme"
+  "homepage": "https://github.com/divyansh0608/miniproject#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
