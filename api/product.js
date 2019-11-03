@@ -5,6 +5,8 @@ const route = express.Router();
 const path = require('path')
 const multer = require('multer');
 
+//image storage
+
 const storage = multer.diskStorage({
   destination: function(req,file, cb) {
    // cb(null,'/uploads/');
@@ -24,7 +26,7 @@ const fileFilter =async(req, file, cb)=>{
     cb(null, false);
   }
 };
-
+//image upload
 const upload = multer({
   storage: storage,
   limits: {
@@ -32,41 +34,19 @@ const upload = multer({
   },
   fileFilter: fileFilter
 });
-/*
-route.get('/', async(req, res)=> {
-  Product.find(function(err, product) {
-      if (err) {
-          console.log(err);
-      } else {
-          res.render('display-product', { product: product });
-          console.log(product);
-      }
-  });
-});
-/*
-route.get('/', (req, res) => {
-  // Get all products
-  
-  Product.findAll()
-      .then((Product) => {
-          res.status(200).send(Product)
-      })
-      .catch((err) => {
-          res.status(500).send({
-              error: "Could not retrieve products"
-          })
-      })
+//product Get request(Information Retrieval)
+route.get('/',function(req,res){
+  Product.find({},function(err,products){
+    if(err){
+      res.send('could not retreive products');
+      next();
+    }
+    res.json(products);
+    console.log(products);
+  })
 })
 
-
-route.get('/', async (req, res) => {
-  try {
-      await productModel(Product);
-      res.send(Product);
-  } catch (err) {
-      res.sendStatus(400);
-  }
-})*/
+//Product Post Request (new Entry To mongo database)
 route.post('/',upload.single('ProductImage'), async (req, res) => {
   const {ProductName, ProductPrice,Seller,ProductImage} = req.body;
 //  const ProductImagepath=req.file.path;
@@ -80,14 +60,6 @@ route.post('/',upload.single('ProductImage'), async (req, res) => {
   console.log(product);
   res.json(productModel);
 });
-route.get('/',function(req,res){
-  Product.find({},function(err,products){
-    if(err){
-      res.send('could not retreive products');
-      next();
-    }
-    res.json(products);
-  })
-})
+
 exports = module.exports = { route }
 //module.exports = route;
