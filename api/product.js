@@ -6,15 +6,17 @@ const path = require('path')
 const multer = require('multer');
 
 const storage = multer.diskStorage({
-  destination: function(req, file, cb) {
-    cb(null,path.join(__dirname+'/uploads'));
+  destination: function(req,file, cb) {
+   // cb(null,'/uploads/');
+    cb(null,'D:/M1/uploads');
   },
   filename: function(req, file, cb) {
-    cb(null, new Date().toISOString() + file.originalname);
+    cb(null, Date.now() + file.originalname); 
+ //cb(null,file.originalname);
   }
 });
 
-const fileFilter = (req, file, cb) => {
+const fileFilter =async(req, file, cb)=>{
   // reject a file
   if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
     cb(null, true);
@@ -31,7 +33,7 @@ const upload = multer({
   fileFilter: fileFilter
 });
 /*
-route.get('/', function(req, res) {
+route.get('/', async(req, res)=> {
   Product.find(function(err, product) {
       if (err) {
           console.log(err);
@@ -56,23 +58,23 @@ route.get('/', (req, res) => {
       })
 })
 
-*/
-route.get('/productModel', async (req, res) => {
+
+route.get('/', async (req, res) => {
   try {
-      const col = await productModel(Product);
-      res.send(col.Product);
+      await productModel(Product);
+      res.send(Product);
   } catch (err) {
       res.sendStatus(400);
   }
-})
-route.post('/productModel',upload.single('ProductImage'), async (req, res) => {
-  const { ProductName, ProductPrice,Seller} = req.body;
-  const {ProductImage}=req.file.path;
+})*/
+route.post('/',upload.single('ProductImage'), async (req, res) => {
+  const {ProductName, ProductPrice,Seller,ProductImage} = req.body;
+//  const ProductImagepath=req.file.path;
   let product = {};
   product.ProductName = ProductName;
   product.ProductPrice = ProductPrice;
   product.Seller = Seller;
-  product.ProductImage= ProductImage;
+  product.ProductImage= req.file.path;
   let productModel = new Product(product);
   await productModel.save();
   console.log(product);
