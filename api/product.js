@@ -80,6 +80,14 @@ route.post('/',upload.single('ProductImage'), async (req, res) => {
   console.log(product);
   res.json(productModel);
 });
-
+route.get('/',function(req,res){
+  Product.find({},function(err,products){
+    if(err){
+      res.send('could not retreive products');
+      next();
+    }
+    res.json(products);
+  })
+})
 exports = module.exports = { route }
 //module.exports = route;

@@ -15,7 +15,7 @@ const product = new mongoose.Schema({
   },
   
   ProductImage: { type: String, required: true },
-  date: { type: Date, default: Date.now}
+  created_on: { type: Date, default: Date.now}
 });
 
 module.exports = Product = mongoose.model('product', product);
