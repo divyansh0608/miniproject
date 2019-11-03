@@ -8,9 +8,10 @@ app.use(express.json({ extended: false }))
 app.use(express.urlencoded({extended: true}))
 app.use('/', express.static(path.join(__dirname, 'public')))
 
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 app.use('/Api/userModel', require('./Api/User').route)
 app.use('/Api/productModel', require('./Api/Product').route)
 
 const Port = process.env.Port || 3000;
-app.listen(Port, () => console.log('Server started at http://localhost:2678')) 
+app.listen(Port, () => console.log('Server started at http://localhost:3000')) 
 
