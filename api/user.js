@@ -11,7 +11,7 @@ route.post('/', async (req, res) => {
   let userModel = new User(user);
   await userModel.save();
   res.json(userModel);
-});
+}); 
 
 exports = module.exports = { route }
-//module.exports = route;
+//module.exports = route; 

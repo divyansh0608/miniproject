@@ -55,7 +55,7 @@ route.post('/',upload.single('ProductImage'), async (req, res) => {
   product.ProductPrice = ProductPrice;
   product.Seller = Seller;
   product.ProductImage= req.file.path;
-  let productModel = new Product(product);
+  let productModel = new Product(product); 
   await productModel.save();
   console.log(product);
   res.json(productModel);
