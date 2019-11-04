@@ -28,6 +28,7 @@
             <div class="col"></div>
             <div class="col-6">
                 <form class="form-horizontal" method="POST" enctype="multipart/form-data" id="fileUploadForm" action="/Api/productModel">
+                    <!--id="fileUploadForm"-->
                     <div class="form-group">
                         <label for="ProductName">Product Name</label>
                         <input type="text" id="ProductName">
@@ -40,12 +41,13 @@
                         <label for="Seller">Manufacturer</label>
                         <input type="text" id="Seller">
                     </div>
-                  <div class="form-group">
+                    <div class="form-group">
                         <label class="control-label col-sm-2" for="ProductImage">Upload image:</label>
                         <div class="col-sm-5">
-                            <input type="file" class="form-control" id="ProductImage" placeholder="Upload image"  name="ProductImage"></input>
+                            <input type="file" class="form-control" id="ProductImage" placeholder="Upload image" name="ProductImage"></input>
                         </div>
                     </div> 
+
                     <div class="form-group"> 
                         <div class="col-sm-offset-2 col-sm-5">
                           <button type="submit" class="btn btn-default" id="btnProductAdd">Upload</button>
