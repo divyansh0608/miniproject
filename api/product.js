@@ -48,7 +48,7 @@ route.get('/',function(req,res){
 
 //Product Post Request (new Entry To mongo database)
 route.post('/',upload.single('ProductImage'), async (req, res) => {
-  const {ProductName, ProductPrice,Seller,ProductImage} = req.body;
+  const {ProductName, ProductPrice,Seller} = req.body;
 //  const ProductImagepath=req.file.path;
   let product = {};
   product.ProductName = ProductName;
